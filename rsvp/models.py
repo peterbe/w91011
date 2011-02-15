@@ -27,7 +27,7 @@ class RSVP(models.Model):
     user = models.ForeignKey(User, unique=True)
     coming = models.BooleanField(default=True,
       choices=[(True, "Yes!"), (False, "Unfortunately not")])
-    people = models.StringArrayField()
+    people = StringArrayField()
     no_people = models.IntegerField(default=1)
     food = models.ManyToManyField(Food)
     other_dietary_requirements = models.TextField(blank=True)
