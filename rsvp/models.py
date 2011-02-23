@@ -37,7 +37,7 @@ class RSVP(models.Model):
     people = StringArrayField()
     no_people = models.IntegerField(default=1)
     food = models.ManyToManyField(Food)
-    other_dietary_refquirements = models.TextField(blank=True)
+    other_dietary_requirements = models.TextField(blank=True)
     song_requests = models.TextField(blank=True)
 
     add_date = models.DateTimeField(default=datetime.datetime.now)

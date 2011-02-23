@@ -15,7 +15,8 @@
     <td><strong>{{ name }}</strong></td>
     <td>
       <table>
-        {% with counter.index as index %}
+
+        {% with forloop.counter as index %}
         {% for food in foods %}
         <tr>
           <td style="vertical-align:top"><input type="radio" name="food_{{ index }}" value="{{ food.pk }}"
@@ -32,6 +33,7 @@
     </td>
   </tr>
   {% endfor %}
+  {{ extra_form }}
 </table>
 
 <div><input type="submit" value="RSVP!">

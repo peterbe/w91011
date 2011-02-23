@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block page_title %}Thanks!{% endblock %}
+
+{% block main %}
+
+<h2>Thanks for RSVPing!</h2>
+
+<p>If you need to change your RSVP you can <a href="{% url rsvp:start %}">start of here</a>.</p>
+
+<p><a href="{% url website:start-page %}">Go back to the start page for more information about the wedding</a></p>
+
+{% endblock %}
