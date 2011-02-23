@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 {% block main %}
-Start page
+
+{% if request.user.is_authenticated %}
+{% else %}
+
+<h4>To this site you have to be either invited (check your inbox)
+or have a log in.</h4>
+{% include "website/login_form.html" %}
+{% endif %}
 
 {% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block page_title %}RSVP Food{% endblock %}
+
+{% block main %}
+
+<form action="." method="post">
+{% csrf_token %}
+
+<h4>What do people want to eat?</h3>
+
+<table>
+  {% for name, chosen_food_pk in names %}
+  <tr>
+    <td><strong>{{ name }}</strong></td>
+    <td>
+      <table>
+        {% with counter.index as index %}
+        {% for food in foods %}
+        <tr>
+          <td style="vertical-align:top"><input type="radio" name="food_{{ index }}" value="{{ food.pk }}"
+                     {% if chosen_food_pk == food.pk %}checked="checked"{% endif %}></td>
+          <td>
+            <p><strong>{{ food.title }}</strong><br>
+               {{ food.description }}
+            </p>
+          </td>
+        </tr>
+        {% endfor %}
+        {% endwith %}
+      </table>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<div><input type="submit" value="RSVP!">
+<strong>Next,</strong> information about the wedding!</div>
+</form>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+</script>
+{% endblock %}

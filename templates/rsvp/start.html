@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block page_title %}RSVP{% endblock %}
+
+{% block main %}
+
+<form action="." method="post">
+{% csrf_token %}
+
+<p>First of all, are you coming?</p>
+
+<div>
+<input type="radio" name="coming" value="yes" id="id_yes"><label for="id_yes">YES!!</label><br>
+<input type="radio" name="coming" value="" id="id_no"><label for="id_no">No :(</label>
+</div>
+
+
+<table id="form" style="display:none">
+{{ form }}
+</table>
+<div><input type="submit" value="RSVP!">
+<strong>Next,</strong> the food!</div>
+</form>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="/js/rsvp.js"></script>
+{% endblock %}

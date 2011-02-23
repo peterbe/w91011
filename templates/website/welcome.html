@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h1>Welcome to {{ PROJECT_NAME }}</h1>
+
+<form action="." method="post">
+{% csrf_token %}
+
+<table>
+{{ form }}
+  <tr>
+    <td></td>
+    <td><input type="submit" value="Sign up"></td>
+  </tr>
+</table>
+</form>
+{% endblock %}

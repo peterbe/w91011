@@ -20,8 +20,15 @@ class StringArrayField(models.CharField):
         return '|'.join(value)
 
 class Food(models.Model):
+    class Meta:
+        ordering = ('id',)
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
+
+    def __unicode__(self):
+        return self.title
+
+
 
 class RSVP(models.Model):
     user = models.ForeignKey(User, unique=True)
@@ -30,7 +37,8 @@ class RSVP(models.Model):
     people = StringArrayField()
     no_people = models.IntegerField(default=1)
     food = models.ManyToManyField(Food)
-    other_dietary_requirements = models.TextField(blank=True)
+    other_dietary_refquirements = models.TextField(blank=True)
+    song_requests = models.TextField(blank=True)
 
     add_date = models.DateTimeField(default=datetime.datetime.now)
     modify_date = models.DateTimeField(default=datetime.datetime.now)

@@ -12,6 +12,7 @@ EMAIL_SUBJECT_PREFIX = '[W91011] '
 ADMINS = (
      ('Peter Bengtsson', 'peter@fry-it.com'),
 )
+WEBMASTER_EMAIL = 'ashleynoval@gmail.com'
 
 MANAGERS = ADMINS
 
@@ -102,6 +103,34 @@ INSTALLED_APPS = (
 MIGRATIONS_ROOT = os.path.join(HERE, 'migrations')
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 LOG_FILENAME = os.path.join(HERE, 'event.log')
+
+MIDDLEWARE_CLASSES = (
+  'django.middleware.common.CommonMiddleware',
+  'django.contrib.sessions.middleware.SessionMiddleware',
+  'django.middleware.csrf.CsrfViewMiddleware',
+  'django.contrib.auth.middleware.AuthenticationMiddleware',
+  'django.contrib.messages.middleware.MessageMiddleware',
+  'website.middleware.InvitationKeysMiddleware',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+  'django.contrib.auth.context_processors.auth',
+  'django.core.context_processors.debug',
+  'django.core.context_processors.i18n',
+  'django.core.context_processors.media',
+  'django.contrib.messages.context_processors.messages',
+    "context_processors.context",
+)
+
+
+INVITATION_KEYS = (
+  'ashleyisalittlecutefish',
+)
+
+LOGIN_URL = '/login/'
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 300
+
+PROJECT_NAME = "Ashley and Peter's wedding 2011"
 
 try:
     from local_settings import *
