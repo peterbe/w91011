@@ -9,6 +9,7 @@ from django.core.mail import send_mail
 from utils import render
 from forms import SignupForm, LoginForm
 from django.contrib.auth import load_backend, login
+from rsvp.models import RSVP, Food
 
 WELCOME_MESSAGE = """
 Hi %(first_name)s,
@@ -24,7 +25,12 @@ Puss och kram, Peter & Ashley
 
 @render('website/start_page.html')
 def start_page(request):
-    if not request.user.is_authenticated():
+    if request.user.is_authenticated():
+        try:
+            rsvp = RSVP.objects.get(user=request.user)
+        except RSVP.DoesNotExist:
+            rsvp = None
+    else:
         if request.method == "POST":
             form = LoginForm(data=request.POST)
             if form.is_valid():

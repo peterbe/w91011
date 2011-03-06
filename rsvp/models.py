@@ -1,6 +1,7 @@
 import datetime
 from django.db import models
 from django.contrib.auth.models import User
+from fields import JSONField
 
 class StringArrayField(models.CharField):
     __metaclass__ = models.SubfieldBase
@@ -36,7 +37,7 @@ class RSVP(models.Model):
       choices=[(True, "Yes!"), (False, "Unfortunately not")])
     people = StringArrayField()
     no_people = models.IntegerField(default=1)
-    food = models.ManyToManyField(Food)
+    food = JSONField(null=True)
     other_dietary_requirements = models.TextField(blank=True)
     song_requests = models.TextField(blank=True)
 

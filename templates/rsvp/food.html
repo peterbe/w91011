@@ -8,29 +8,26 @@
 {% csrf_token %}
 
 <h4>What do people want to eat?</h3>
-
 <table>
-  {% for name, chosen_food_pk in names %}
+  <tr>
+    <td>&nbsp;</td>
+    {% for food in all_foods %}
+    <td>
+       <p><strong>{{ food.title }}</strong><br>
+       {{ food.description }}
+       </p>
+    </td>
+    {% endfor %}
+  </tr>
+  {% for name, chosen_food in names %}
   <tr>
     <td><strong>{{ name }}</strong></td>
-    <td>
-      <table>
-
         {% with forloop.counter as index %}
-        {% for food in foods %}
-        <tr>
+        {% for food in all_foods %}
           <td style="vertical-align:top"><input type="radio" name="food_{{ index }}" value="{{ food.pk }}"
-                     {% if chosen_food_pk == food.pk %}checked="checked"{% endif %}></td>
-          <td>
-            <p><strong>{{ food.title }}</strong><br>
-               {{ food.description }}
-            </p>
-          </td>
-        </tr>
+                     {% if chosen_food == food %}checked="checked"{% endif %}></td>
         {% endfor %}
         {% endwith %}
-      </table>
-    </td>
   </tr>
   {% endfor %}
   {{ extra_form }}

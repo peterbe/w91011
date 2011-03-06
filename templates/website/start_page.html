@@ -3,6 +3,32 @@
 {% block main %}
 
 {% if request.user.is_authenticated %}
+
+  {% if rsvp %}
+  <p><strong>You have</strong> RSVP'ed
+    {% if rsvp.coming %}
+    ({{ rsvp.people|join:", " }})
+    and we're so glad that you're coming!
+    <br>
+    If you need to change anything you can go back
+    and <a href="{% url rsvp:start %}">RSVP again</a>.
+    {% else %}
+    and it's such a shame you can't come.
+    <br>
+    If you change your mind you can <a href="{% url rsvp:start %}">RSVP again</a>.
+    {% endif %}
+  </p>
+  {% else %}
+  <p>
+  You haven't RSVP'ed yet!<br>
+  <a style="font-weight:bold" href="{% url rsvp:start %}">RSVP now</a>
+  </p>
+  {% endif %}
+
+  <h3>Information</h3>
+
+
+
 {% else %}
 
 <h4>To this site you have to be either invited (check your inbox)

@@ -8,9 +8,10 @@
 {% csrf_token %}
 
 <p>First of all, are you coming?</p>
-
 <div>
-<input type="radio" name="coming" value="yes" id="id_yes"><label for="id_yes">YES!!</label><br>
+<input type="radio" name="coming" value="yes" id="id_yes"
+  {% if coming %}checked{% endif %}
+><label for="id_yes">YES!!</label><br>
 <input type="radio" name="coming" value="" id="id_no"><label for="id_no">No :(</label>
 </div>
 
