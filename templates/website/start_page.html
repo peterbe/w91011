@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load pages_tags %}
+
 {% block main %}
 
 {% if request.user.is_authenticated %}
@@ -27,6 +29,12 @@
 
   <h3>Information</h3>
 
+  {% load_pages %}
+  <ul>
+    {% for page in pages_navigation %}
+        {% pages_menu page %}
+    {% endfor %}
+  </ul>
 
 
 {% else %}

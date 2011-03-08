@@ -30,6 +30,8 @@ def start_page(request):
             rsvp = RSVP.objects.get(user=request.user)
         except RSVP.DoesNotExist:
             rsvp = None
+
+
     else:
         if request.method == "POST":
             form = LoginForm(data=request.POST)
