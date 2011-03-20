@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-{% load pages_tags %}
-
 {% block main %}
 
 {% if request.user.is_authenticated %}
@@ -28,11 +26,9 @@
   {% endif %}
 
   <h3>Information</h3>
-
-  {% load_pages %}
   <ul>
-    {% for page in pages_navigation %}
-        {% pages_menu page %}
+    {% for page in flat_pages %}
+        <li><a href="{{ page.url }}">{{ page.title }}</a>
     {% endfor %}
   </ul>
 

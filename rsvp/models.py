@@ -43,3 +43,9 @@ class RSVP(models.Model):
 
     add_date = models.DateTimeField(default=datetime.datetime.now)
     modify_date = models.DateTimeField(default=datetime.datetime.now)
+
+    def __unicode__(self):
+        if self.people:
+            return ', '.join(self.people)
+        else:
+            return unicode(self.user)

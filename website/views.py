@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.db import transaction
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.contrib.flatpages.models import FlatPage
 from utils import render
 from forms import SignupForm, LoginForm
 from django.contrib.auth import load_backend, login
@@ -30,8 +31,7 @@ def start_page(request):
             rsvp = RSVP.objects.get(user=request.user)
         except RSVP.DoesNotExist:
             rsvp = None
-
-
+        flat_pages = FlatPage.objects.all()
     else:
         if request.method == "POST":
             form = LoginForm(data=request.POST)

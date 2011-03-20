@@ -92,7 +92,6 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'rsvp',
     'website',
-    'pages',
     'tinymce',
 )
 
@@ -117,7 +116,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.contrib.messages.context_processors.messages',
     'context_processors.context',
-    'pages.context_processors.media',
 )
 
 
@@ -129,16 +127,7 @@ LOGIN_URL = '/login/'
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 300
 
 PROJECT_NAME = "Ashley and Peter's wedding 2011"
-
-# pages
-PAGE_DEFAULT_TEMPLATE = 'pages/index.html'
-PAGE_TINYMCE = True
-PAGE_LANGUAGES = (('en-us', 'US English'),)
 TINYMCE_JS_URL = '/js/tiny_mce/tiny_mce.js'
-PAGES_MEDIA_URL = '/static/pages/'
-PAGES_MEDIA_ROOT = os.path.join(MEDIA_ROOT, 'pages')
-
-
 
 
 try:
