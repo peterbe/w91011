@@ -36,8 +36,10 @@ def start(request):
         if RSVP.objects.filter(user=request.user):
             rsvp = RSVP.objects.get(user=request.user)
             people = rsvp.people
-            if request.user.first_name not in people:
-                people.insert(0, request.user.first_name)
+            first_person_name = '%s %s' % (request.user.first_name, request.user.last_name)
+            first_person_name = first_person_name.strip()
+            if first_person_name not in people:
+                people.insert(0, first_person_name)
             coming = rsvp.coming
             initial = dict(people='\n'.join(people),
                            song_requests=rsvp.song_requests)

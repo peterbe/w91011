@@ -3,3 +3,5 @@
 event.log
 .venv
 
+w91011.db
+local_settings.py
