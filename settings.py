@@ -126,7 +126,7 @@ INVITATION_KEYS = (
 LOGIN_URL = '/login/'
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 300
 
-PROJECT_NAME = "Ashley and Peter's wedding 2011"
+PROJECT_NAME = "Ashley and Peter's Wedding 2011"
 TINYMCE_JS_URL = '/js/tiny_mce/tiny_mce.js'
 
 
