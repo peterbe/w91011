@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load website_tags %}
 {% block main %}
 
 {% if request.user.is_authenticated %}
@@ -28,7 +29,7 @@
   <h3>Information</h3>
   <ul>
     {% for page in flat_pages %}
-        <li><a href="{{ page.url }}">{{ page.title }}</a>
+        <li><a href="{{ page.url }}">{{ page.title|flatpage_title }}</a>
     {% endfor %}
   </ul>
 

@@ -31,7 +31,7 @@ def start_page(request):
             rsvp = RSVP.objects.get(user=request.user)
         except RSVP.DoesNotExist:
             rsvp = None
-        flat_pages = FlatPage.objects.all()
+        flat_pages = FlatPage.objects.all().order_by('title')
     else:
         if request.method == "POST":
             form = LoginForm(data=request.POST)
