@@ -6,11 +6,10 @@
 {% if request.user.is_authenticated %}
 
   {% if rsvp %}
-  <p><strong>You have</strong> RSVP'ed
+  <h3><strong>You have</strong> RSVP'ed
     {% if rsvp.coming %}
     ({{ rsvp.people|join:", " }})
     and we're so glad that you're coming!
-    <br>
     If you need to change anything you can go back
     and <a href="{% url rsvp:start %}">RSVP again</a>.
     {% else %}
@@ -18,13 +17,17 @@
     <br>
     If you change your mind you can <a href="{% url rsvp:start %}">RSVP again</a>.
     {% endif %}
-  </p>
+  </h3>
   {% else %}
-  <p>
-  You haven't RSVP'ed yet!<br>
-  <a style="font-weight:bold" href="{% url rsvp:start %}">RSVP now</a>
-  </p>
+  <h3>You haven't RSVP'ed yet - <a style="font-weight:bold" href="{% url rsvp:start %}">RSVP now &raquo;</a></h3>
   {% endif %}
+  <br/>
+<br clear="all"/>
+
+  <p>The wedding will take place in Springfield, home of the Simpsons and there will be Reverend Jones, Comic Book guy and Moe all in attendance. You will get to dance with Marge, although bring a hair brush.</p>
+  
+  <p>Although Bart will be kept under lock and key for the duration of the event, we will be organising a charity Bartger Bating event towards the end of the night, with a £1000 prize for the guest who brings along a special rodent capable of defeating Bart in unarmed to-the-death combat. Be warned, Bart is a fearsome fighter when provoked, but also remember it's for charidee.</p>
+
 
   <h3>Information</h3>
   <ul>
@@ -36,8 +39,7 @@
 
 {% else %}
 
-<h4>To this site you have to be either invited (check your inbox)
-or have a log in.</h4>
+<h4>You'll need to login - check your email inbox!</h4>
 {% include "website/login_form.html" %}
 {% endif %}
 

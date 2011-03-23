@@ -16,34 +16,49 @@
   <link rel="shortcut icon" href="/favicon.ico">
 
   <link rel="stylesheet" href="/css/style.css">
+  
   <script src="/js/libs/modernizr-1.6.min.js"></script>
-  {% block extra_css %}
-  {% endblock %}
+  {% block extra_css %} {% endblock %}
+
 
 </head>
 
-<body>
+<body> 
+
+
+  	<header>
+  		<div class="elements">
+      		<h1>{{ PROJECT_NAME }}</h1>
+        	    <div id="user">
+        		    <strong>
+      				{% if request.user.is_authenticated %}
+        			<p>Howdy/Hej {{ request.user.first_name }}!</p>
+      				{% else %}
+        			<p><a href="/">Log in</a></p>
+      				{% endif %}
+      				</strong>
+    			</div>
+     		 <p class="date">We're celebrating Ashley &amp; Peter's wedding on 10 September 2011</p>
+      		
+      		{% if request.user.is_authenticated %}
+      		<div class="nav">
+      			<a href="/">Home</a> / 
+      			<a href="/rsvp">RSVP</a> / 
+      			<a href="/pages">Information about the wedding</a> 
+			</div>
+			{% endif %}
+		</div>
+    </header>
 
   <div id="container">
-    <header>
-      <h1>{% block page_title %}{% endblock %}</h1>
-    </header>
-    <div id="user">
-      {% if request.user.is_authenticated %}
-        <p>Howdy/Hej {{ request.user.first_name }}</p>
-      {% else %}
-        <p><a href="/">Log in</a></p>
-      {% endif %}
-    </div>
+  
 
-    <div id="main">
+
+   <div id="main">
     {% block main %}
     {% endblock %}
-    </div>
+	</div>
 
-    <footer>
-      <p>Ashley &amp; Peter's 2011 Wedding, 9.10.11</p>
-    </footer>
   </div> <!-- end of #container -->
 
 
@@ -77,6 +92,8 @@
    })(document, 'script');
   </script>
   {% endcomment %}
+
+  {% block extra-js %} {% endblock %}
 
 </body>
 </html>

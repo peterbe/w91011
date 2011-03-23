@@ -1,6 +1,7 @@
 <form action="/" method="post">{% csrf_token %}
-<table>
-{{ form }}
-</table>
-<div><input type="submit" value="Log in"></div>
+
+<input id="id_username_or_email" type="text" name="username_or_email" maxlength="200" value="email address" /></p>
+<input type="password" name="password" id="id_password" value="password"/></p>
+
+<input type="submit" value="Login" class="submit">
 </form>
