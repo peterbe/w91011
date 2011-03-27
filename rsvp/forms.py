@@ -4,7 +4,9 @@ from utils.forms import BaseForm
 from models import RSVP, Food
 
 class RSVPForm(BaseForm):
-    people = forms.CharField(required=True, help_text="Write one name per line",
+    people = forms.CharField(
+      label="People coming (including your name write one name per line)",
+      required=True, help_text="",
       widget=forms.widgets.Textarea(attrs=dict(cols=30, rows=2)))
     #food = forms.ModelChoiceField(queryset=Food.objects)
     #other_dietary_requirements = forms.CharField(required=False,
@@ -18,5 +20,5 @@ class RSVPForm(BaseForm):
 
 class FoodExtraForm(BaseForm):
     other_dietary_requirements = forms.CharField(required=False,
-      help_text="Anything extra we should know like nut allergy",
+      label="Other dietary requirements (anything extra we should know like nut allergy)",
       widget=forms.widgets.Textarea(attrs=dict(cols=30, rows=2)))

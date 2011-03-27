@@ -16,15 +16,17 @@ from utils import render
 def start(request):
     if request.method == "POST":
         form = RSVPForm(data=request.POST)
-        if form.is_valid():
+        if form.is_valid() or not request.POST.get('coming'):
             if RSVP.objects.filter(user=request.user):
                 rsvp =RSVP.objects.get(user=request.user)
             else:
                 rsvp =RSVP.objects.create(user=request.user, food={})
+
             if not request.POST.get('coming'):
                 rsvp.coming = False
                 rsvp.save()
                 return HttpResponseRedirect(reverse('rsvp:shame'))
+
             people = form.cleaned_data['people']
             people = [x.strip() for x in people.splitlines() if x.strip()]
             rsvp.people = people
@@ -32,19 +34,22 @@ def start(request):
             rsvp.song_requests = form.cleaned_data['song_requests']
             rsvp.save()
             return HttpResponseRedirect(reverse('rsvp:food'))
+        else:
+            print form.errors
     else:
+        person_name = '%s %s' % (request.user.first_name, request.user.last_name)
+        print person_name
         if RSVP.objects.filter(user=request.user):
             rsvp = RSVP.objects.get(user=request.user)
             people = rsvp.people
-            first_person_name = '%s %s' % (request.user.first_name, request.user.last_name)
-            first_person_name = first_person_name.strip()
-            if first_person_name not in people:
-                people.insert(0, first_person_name)
+            person_name = person_name.strip()
+            if person_name not in people:
+                people.insert(0, person_name)
             coming = rsvp.coming
             initial = dict(people='\n'.join(people),
                            song_requests=rsvp.song_requests)
         else:
-            initial = dict(people=request.user.first_name)
+            initial = dict(people=person_name)
         form = RSVPForm(initial=initial)
     return locals()
 

@@ -7,31 +7,37 @@
 <form action="." method="post">
 {% csrf_token %}
 
-<h4>What do people want to eat?</h3>
-<table>
+<h4>What do people want to eat?</h4>
+<table style="margin-top:25px; margin-bottom:35px">
+  <tbody>
   <tr>
     <td>&nbsp;</td>
     {% for food in all_foods %}
-    <td>
+    <td style="padding-left:20px">
        <p><strong>{{ food.title }}</strong><br>
        {{ food.description }}
        </p>
     </td>
     {% endfor %}
   </tr>
+  </tbody>
+  <tbody>
   {% for name, chosen_food in names %}
   <tr>
-    <td><strong>{{ name }}</strong></td>
+    <td><p style="font-weight:bold">{{ name }}</p></td>
         {% with forloop.counter as index %}
         {% for food in all_foods %}
-          <td style="vertical-align:top"><input type="radio" name="food_{{ index }}" value="{{ food.pk }}"
+          <td style="vertical-align:top; padding-left:20px">
+          <input type="radio" name="food_{{ index }}" value="{{ food.pk }}"
+                 style="font-size:120%"
                      {% if chosen_food == food %}checked="checked"{% endif %}></td>
         {% endfor %}
         {% endwith %}
   </tr>
   {% endfor %}
-  {{ extra_form }}
+  </tbody>
 </table>
+  {{ extra_form.as_p }}
 
 <div><input type="submit" value="RSVP!">
 <strong>Next,</strong> information about the wedding!</div>
