@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.db import transaction
+from django.db.models import Q
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.contrib.flatpages.models import FlatPage
@@ -36,6 +37,18 @@ def start_page(request):
         if request.method == "POST":
             form = LoginForm(data=request.POST)
             if form.is_valid():
+                username_or_email = form.cleaned_data['username_or_email']
+                user = User.objects.get(Q(username__iexact=username_or_email) | \
+                                        Q(email__iexact=username_or_email))
+                pw = form.cleaned_data['password']
+                assert user.check_password(pw)
+                for backend in settings.AUTHENTICATION_BACKENDS:
+                    if user == load_backend(backend).get_user(user.pk):
+                        user.backend = backend
+
+                if hasattr(user, 'backend'):
+                    login(request, user)
+
                 return HttpResponseRedirect('/?logged_in=HELLYEAH')
         else:
             form = LoginForm()

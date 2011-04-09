@@ -1,4 +1,5 @@
 <form action="{% url website:login %}" method="post">{% csrf_token %}
+{{ form.errors }}
 {{ form.username_or_email.errors }}
 {{ form.username_or_email }}<br>
 {{ form.password.errors }}
