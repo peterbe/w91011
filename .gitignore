@@ -5,3 +5,4 @@ event.log
 
 w91011.db
 local_settings.py
+test_settings.py

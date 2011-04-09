@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block page_title %}RSVP Song requests{% endblock %}
+
+{% block main %}
+
+<form action="." method="post">
+{% csrf_token %}
+<p>So we're almost there, just one more little thing.<br>
+Please tell us what kind of song requests you have. Enter it below.
+</p>
+
+{{ form.as_p }}
+
+<div><input type="submit" class="submit" value="Next!"></div>
+<p><strong>Next,</strong> information about the wedding!</p>
+</form>
+
+{% endblock %}

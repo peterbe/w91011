@@ -13,15 +13,15 @@ from django.contrib.auth import load_backend, login
 from rsvp.models import RSVP, Food
 
 WELCOME_MESSAGE = """
-Hi %(first_name)s,
+Hej %(first_name)s,
 
 Thank you for logging in to our wedding site.
-Since it's an invitation-only site you have to have an account.
+Since it's an invitation-only site so you have to have an account.
 If you ever need to log in again, do so with your email address
-(%(email)s) and the password is: %(password)s
+(%(email)s) and the password you chose.
 
 --
-Puss och kram, Peter & Ashley
+Puss och kram, kisses and hugs, Peter & Ashley
 """
 
 @render('website/start_page.html')
@@ -58,16 +58,13 @@ def welcome(request):
             username = '%s_%s' % (first_name, last_name)
             username = username.lower()
             email = form.cleaned_data['email']
-            #password = form.cleaned_data['password']
+            password = form.cleaned_data['password']
             user = User.objects.create(
               username=username,
               first_name=first_name,
               last_name=last_name,
               email=email,
             )
-            password = list('password123')
-            shuffle(password)
-            password = ''.join(password)
             user.set_password(password)
             user.save()
 

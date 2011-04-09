@@ -118,6 +118,8 @@ div#main {
   padding: 40px;
   -moz-box-shadow: 0 1px 8px #75adcd;
   -moz-border-radius: 20px;
+  border-radius: 20px;
+  box-shadow: 0 1px 8px #75adcd;
   width: 700px;
   margin-bottom:20px;
 }
@@ -148,6 +150,7 @@ div#form-fields {
 }
 
 label {
+  display:block;
   font-weight: bold;
   /*color: black;*/
   font-size:12px;
@@ -156,18 +159,21 @@ label {
 input {
   padding: 10px;
   font-size: 20px;
-  margin: 0px 0 20px 0;
+  margin: 0 0 5px 0;
   -moz-border-radius: 10px;
+  border-radius: 10px;
+
 }
 
 input.submit {
   background: url('/images/login.png') no-repeat top left;
   border:none;
-  -moz-border-radius: 0px 10px 10px 0px;
-  padding: 12px 20px;
+  padding: 10px 20px;
   color: #fff;
   font-weight: normal;
   width:110px ;
+}
+input.submit_right {
   float: right;
 }
 
@@ -301,6 +307,12 @@ p {
   font-size: 15px;
 }
 
+input.placeholder {
+  color:#999;
+}
+ul.errorlist li {
+  color:red;
+}
 /* end page styles */
 
 

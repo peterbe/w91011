@@ -1,7 +1,8 @@
-<form action="/" method="post">{% csrf_token %}
-
-<input id="id_username_or_email" type="text" name="username_or_email" maxlength="200" value="email address" /></p>
-<input type="password" name="password" id="id_password" value="password"/></p>
+<form action="{% url website:login %}" method="post">{% csrf_token %}
+{{ form.username_or_email.errors }}
+{{ form.username_or_email }}<br>
+{{ form.password.errors }}
+{{ form.password }}
 
 <input type="submit" value="Login" class="submit">
 </form>

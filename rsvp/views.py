@@ -6,7 +6,7 @@ from django.db import transaction
 from django.contrib import messages#
 from django.contrib.auth.decorators import login_required
 
-from forms import RSVPForm, FoodExtraForm
+from forms import RSVPForm, FoodExtraForm, SongRequestsForm
 from models import RSVP, Food
 from utils import render
 
@@ -31,14 +31,12 @@ def start(request):
             people = [x.strip() for x in people.splitlines() if x.strip()]
             rsvp.people = people
             rsvp.no_people = len(people)
-            rsvp.song_requests = form.cleaned_data['song_requests']
             rsvp.save()
             return HttpResponseRedirect(reverse('rsvp:food'))
         else:
             print form.errors
     else:
         person_name = '%s %s' % (request.user.first_name, request.user.last_name)
-        print person_name
         if RSVP.objects.filter(user=request.user):
             rsvp = RSVP.objects.get(user=request.user)
             people = rsvp.people
@@ -85,12 +83,27 @@ def food(request):
             rsvp.food[name] = pk
 
         rsvp.save()
-        return HttpResponseRedirect(reverse('rsvp:thanks'))
+        return HttpResponseRedirect(reverse('rsvp:song_requests'))
 
     else:
         extra_form = FoodExtraForm(initial=\
           dict(other_dietary_requirements=rsvp.other_dietary_requirements))
 
+    return locals()
+
+@render('rsvp/song_requests.html')
+@login_required
+@transaction.commit_on_success
+def song_requests(request):
+    rsvp = RSVP.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = SongRequestsForm(data=request.POST)
+        if form.is_valid():
+            rsvp.song_requests = form.cleaned_data['song_requests']
+            rsvp.save()
+            return HttpResponseRedirect(reverse('rsvp:thanks'))
+    else:
+        form = SongRequestsForm(initial={'song_requests':rsvp.song_requests})
     return locals()
 
 @render('rsvp/shame.html')

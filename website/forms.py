@@ -3,15 +3,21 @@ from django.contrib.auth.models import User
 from utils.forms import BaseModelForm, BaseForm
 
 class SignupForm(BaseModelForm):
+    #password = forms.CharField(widget=forms.widgets.PasswordInput())
     class Meta:
         model = User
         #exclude = ('password','username')
-        fields = ('first_name','last_name','email')
+        fields = ('first_name','last_name','email','password')
     def __init__(self, *args, **kwargs):
         super(SignupForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
         self.fields['email'].required = True
+        self.fields['password'].required = True
+        self.fields['password'].label = "Choose a password"
+        self.fields['password'].help_text = ""
+        self.fields['password'].widget = forms.widgets.PasswordInput()
+
 
 class LoginForm(BaseForm):
     username_or_email = forms.CharField(label="Email address or username", max_length=200)

@@ -39,13 +39,28 @@
 </table>
   {{ extra_form.as_p }}
 
-<div><input type="submit" value="RSVP!">
-<strong>Next,</strong> information about the wedding!</div>
+<div><input type="submit" class="submit" value="Next!"></div>
+<!--<p><strong>Next,</strong> information about the wedding!</p>-->
+<p><strong>Next,</strong> song requests!</p>
 </form>
 
 {% endblock %}
 
 {% block extra_js %}
 <script>
+$(function() {
+  $('form').submit(function() {
+    var c_false = 0, c_true = 0;
+    $('input[type="radio"]').each(function() {
+      if (this.checked) c_true++;
+      else c_false++;
+    });
+    if (c_true != c_false) {
+      alert("Make sure everyone has selected their preferred food");
+      return false;
+    }
+    return true;
+  });
+});
 </script>
 {% endblock %}
