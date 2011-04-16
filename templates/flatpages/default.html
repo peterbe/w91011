@@ -1,13 +1,14 @@
 {% extends "base.html" %}
-{% block title %}{{ flatpage.title }} - {{ block.super }}{% endblock %}
 
-{% block page_title %}{{ flatpage.title }}{% endblock %}
-
-
+{% load website_tags %}
+{% block title %}{{ flatpage.title|flatpage_title }} - {{ block.super }}{% endblock %}
 
 {% block main %}
 
-{{ flatpage.content }}
-	
-{% endblock %}
+<p><a href="{% url website:start-page %}">&larr; Back to home page</a></p>
 
+<h3>{{ flatpage.title|flatpage_title }}</h3>
+
+{{ flatpage.content }}
+
+{% endblock %}

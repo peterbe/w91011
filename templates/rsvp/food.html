@@ -7,7 +7,9 @@
 <form action="." method="post">
 {% csrf_token %}
 
-<h4>What do people want to eat?</h4>
+<p><a href="{% url rsvp:start %}">&larr; You can go back and change the names of people coming</a></p>
+
+<h3>What do people want to eat?</h3>
 <table style="margin-top:25px; margin-bottom:35px">
   <tbody>
   <tr>
@@ -50,12 +52,16 @@
 <script>
 $(function() {
   $('form').submit(function() {
-    var c_false = 0, c_true = 0;
-    $('input[type="radio"]').each(function() {
-      if (this.checked) c_true++;
-      else c_false++;
+    var count_rows = 0, count_checks = 0;
+    $('form table tr').each(function() {
+      if ($('input[type="radio"]', this).size()) {
+        count_rows++;
+        if ($('input[type="radio"]:checked', this).size()) {
+          count_checks++;
+        }
+      }
     });
-    if (c_true != c_false) {
+    if (count_rows != count_checks) {
       alert("Make sure everyone has selected their preferred food");
       return false;
     }

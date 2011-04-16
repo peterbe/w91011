@@ -4,6 +4,10 @@
 
 {% block main %}
 
+<p><a href="{% url rsvp:food %}">&larr; You can go back and change the food preferences</a></p>
+
+<h3>Song requests?</h3>
+
 <form action="." method="post">
 {% csrf_token %}
 <p>So we're almost there, just one more little thing.<br>

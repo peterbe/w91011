@@ -2,13 +2,19 @@
 
 {% block page_title %}RSVP{% endblock %}
 
+{% block extra_css %}
+<style type="text/css">
+#select-coming label { display:inline; font-size:18px; }
+</style>
+{% endblock %}
+
 {% block main %}
 
 <form action="." method="post">
 {% csrf_token %}
 
 <p>First of all, are you coming?</p>
-<div>
+<div id="select-coming">
 <input type="radio" name="coming" value="yes" id="id_yes"
   {% if coming %}checked{% endif %}
 ><label for="id_yes">YES!!</label><br>
