@@ -24,7 +24,7 @@ class FoodExtraForm(BaseForm):
 
 class SongRequestsForm(BaseForm):
     song_requests = forms.CharField(
-      label="Song request (enter one song per line)",
+      label="Reception song requests (enter one song per line)",
       required=False,
       widget=forms.widgets.Textarea(attrs=dict(cols=30, rows=2)),
       )
