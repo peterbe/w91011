@@ -14,7 +14,9 @@ class FoodAdmin(admin.ModelAdmin):
     rsvped.short_description = "RSVP'ed"
 
 class RSVPAdmin(admin.ModelAdmin):
-    list_display = ('people_list', 'coming','food_brief', 'other')
+
+    list_display = ('people_list', 'coming','food_brief', 'other', 'add_date')
+    ordering = ('add_date',)
 
     def people_list(self, obj):
         if obj.people:
